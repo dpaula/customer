@@ -1,4 +1,4 @@
-package com.dpaula.customer.client;
+package com.dpaula.customer.client.fraud;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

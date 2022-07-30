@@ -1,14 +1,15 @@
 package com.dpaula.customer.service;
 
 import com.dpaula.customer.Customer;
-import com.dpaula.customer.client.FraudCheckRequest;
-import com.dpaula.customer.client.FraudClient;
+import com.dpaula.customer.client.fraud.FraudClient;
+import com.dpaula.customer.client.notification.NotificationClient;
+import com.dpaula.customer.client.notification.NotificationRequest;
 import com.dpaula.customer.controller.CustomerRegistrationRequest;
 import com.dpaula.customer.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public record CustomerService(CustomerRepository repository, FraudClient fraudClient) {
+public record CustomerService(CustomerRepository repository, FraudClient fraudClient, NotificationClient notificationClient) {
     public void register(CustomerRegistrationRequest request) {
 
         final var customer = Customer.builder()
@@ -24,5 +25,17 @@ public record CustomerService(CustomerRepository repository, FraudClient fraudCl
         if(fraudCheckRequest.isFraudster()) {
             throw new IllegalStateException("Customer is a fraudster");
         }
+
+        final var notificationRequest = NotificationRequest.builder()
+                .toCustomerId(customer.getId())
+                .toCustomerEmail(customer.getEmail())
+                .message(getMessageFormat(customer.getFirstName()))
+                .build();
+
+        notificationClient.send(notificationRequest);
+    }
+
+    private String getMessageFormat(String firstName) {
+        return String.format("Bem-vindo %s, seu cadastro foi realizado com sucesso!", firstName);
     }
 }

@@ -1,8 +1,7 @@
-package com.dpaula.customer.client;
+package com.dpaula.customer.client.fraud;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 
 /**
  * @author Fernando de Lima on 29/07/22
