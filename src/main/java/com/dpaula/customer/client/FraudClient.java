@@ -11,12 +11,10 @@ import org.springframework.web.client.RestTemplate;
 @AllArgsConstructor
 public class FraudClient {
 
-    private final RestTemplate restTemplate;
+    private final IFraudClient client;
 
     public FraudCheckRequest getFraudCheckRequest(Integer customerId) {
 
-        return restTemplate.getForObject("http://FRAUD/api/v1/fraud-check/{customerId}",
-                FraudCheckRequest.class,
-                customerId);
+        return client.getFraudCheckRequest(customerId);
     }
 }
