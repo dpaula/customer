@@ -15,7 +15,7 @@ public class FraudClient {
 
     public FraudCheckRequest getFraudCheckRequest(Integer customerId) {
 
-        return restTemplate.getForObject("http://localhost:6061/api/v1/fraud-check/{customerId}",
+        return restTemplate.getForObject("http://FRAUD/api/v1/fraud-check/{customerId}",
                 FraudCheckRequest.class,
                 customerId);
     }
