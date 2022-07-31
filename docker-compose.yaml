@@ -71,52 +71,49 @@ services:
 #      - zipkin
 #      - eureka-server
 #
-#  customer:
-#    image: fplima/customer:latest
-#    container_name: customer
-#    ports:
-#      - "6060:6060"
-#    environment:
-#      - SPRING_PROFILES_ACTIVE=docker
-#    networks:
-#      - postgres
-#      - spring
-#    depends_on:
-#      - zipkin
-#      - eureka-server
-#      - rabbitmq
-#      - postgres
-#
-#  fraud:
-#    image: fplima/fraud:latest
-#    container_name: fraud
-#    ports:
-#      - "6061:6061"
-#    environment:
-#      - SPRING_PROFILES_ACTIVE=docker
-#    networks:
-#      - postgres
-#      - spring
-#    depends_on:
-#      - zipkin
-#      - eureka-server
-#      - postgres
-#
-#  notification:
-#    image: fplima/notification:latest
-#    container_name: notification
-#    ports:
-#      - "6070:6070"
-#    environment:
-#      - SPRING_PROFILES_ACTIVE=docker
-#    networks:
-#      - spring
-#      - postgres
-#    depends_on:
-#      - zipkin
-#      - eureka-server
-#      - rabbitmq
-#      - postgres
+  customer:
+    image: fplima/customer:latest
+    container_name: customer
+    ports:
+      - "6060:6060"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - postgres
+      - spring
+    depends_on:
+      - zipkin
+      - rabbitmq
+      - postgres
+
+  fraud:
+    image: fplima/fraud:latest
+    container_name: fraud
+    ports:
+      - "6061:6061"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - postgres
+      - spring
+    depends_on:
+      - zipkin
+      - postgres
+
+  notification:
+    image: fplima/notification:latest
+    container_name: notification
+    ports:
+      - "6070:6070"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+      - postgres
+    depends_on:
+      - zipkin
+      - rabbitmq
+      - postgres
 
 networks:
   postgres:

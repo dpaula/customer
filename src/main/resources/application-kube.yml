@@ -30,4 +30,4 @@ eureka:
 
 client:
   fraud:
-    url: http://fraud:6061
+    url: http://fraud
