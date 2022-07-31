@@ -2,14 +2,14 @@ package com.dpaula.customer.service;
 
 import com.dpaula.customer.Customer;
 import com.dpaula.customer.client.fraud.FraudClient;
-import com.dpaula.customer.client.notification.NotificationClient;
+import com.dpaula.customer.client.notification.NotificationClientAsync;
 import com.dpaula.customer.client.notification.NotificationRequest;
 import com.dpaula.customer.controller.CustomerRegistrationRequest;
 import com.dpaula.customer.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public record CustomerService(CustomerRepository repository, FraudClient fraudClient, NotificationClient notificationClient) {
+public record CustomerService(CustomerRepository repository, FraudClient fraudClient, NotificationClientAsync notificationClientAsync) {
     public void register(CustomerRegistrationRequest request) {
 
         final var customer = Customer.builder()
@@ -32,7 +32,7 @@ public record CustomerService(CustomerRepository repository, FraudClient fraudCl
                 .message(getMessageFormat(customer.getFirstName()))
                 .build();
 
-        notificationClient.send(notificationRequest);
+        notificationClientAsync.send(notificationRequest);
     }
 
     private String getMessageFormat(String firstName) {

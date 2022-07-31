@@ -22,12 +22,12 @@ public class RabbitMQConfig {
     /**
      * Send messages to the queue
      */
-    @Bean
-    public AmqpTemplate rabbitTemplate() {
-        final var rabbitTemplate = new RabbitTemplate(connectionFactory);
-        rabbitTemplate.setMessageConverter(jacksonConverter());
-        return rabbitTemplate;
-    }
+//    @Bean
+//    public AmqpTemplate rabbitTemplate() {
+//        final var rabbitTemplate = new RabbitTemplate(connectionFactory);
+//        rabbitTemplate.setMessageConverter(jacksonConverter());
+//        return rabbitTemplate;
+//    }
 
     /**
      * Receive messages from the queue
